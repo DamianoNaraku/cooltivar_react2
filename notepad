@@ -1,0 +1,147 @@
+execute
+set environment variable ANDROID_HOME = C:\Users\damia\AppData\Local\Android
+
+run on cmd: %ANDROID_HOME%/tools/bin/sdkmanager --licenses
+
+
+
+
+
+  const [isHungry, setIsHungry] = useState( initialValue );
+// setIsHungry è un setter creato automaticamente.
+// isHungry è il getter come valore grezzo (no func)
+ComponentName(props)
+...
+props.name // per stato immutabile, passato come parametro. come creo stato immutabile ma non input da parametro?
+
+
+cerca <>, </>, credo siano tipo ng-template, il contenuto viene riversato su una tag esistente.
+
+
+      <TextInput
+        style={{height: 40}}
+        placeholder="Type here to translate!"
+        onChangeText={text => setText(text)}
+        defaultValue={text}
+      />
+
+
+
+  <ScrollView> scroll verticale (orizzontale se setti props param), consente anche zoom con prop-param
+!!!! All the elements and views of a ScrollView are rendered, even if they are not currently shown on the screen.
+!!!! If you have a long list of more items than can fit on the screen, you should use a FlatList
+
+
+const styles = StyleSheet.create({
+  container: {flex: 1, paddingTop: 22},
+  sectionHeader: {paddingTop: 2, paddingLeft: 10},
+  item: {padding: 10, fontSize: 18, height: 44},
+})
+crea stili per 3 elementi, poi li assegni con <View style={styles.container}>
+
+!!!! FlatList e SectionList per visualizzare dati grezzi ricevuti dal server in lista scorribile con lazy loading!
+
+Platform.OS === 'ios' // usabile negli if
+
+...Platform.select({
+      ios: {
+        backgroundColor: 'red'
+      },
+      android: {
+        backgroundColor: 'green'
+      },
+      default: {
+        // other platforms, web for example
+        backgroundColor: 'blue'
+      }
+    })
+
+Since it accepts any value, you can also use it to return platform specific component, like below:
+
+const Component = Platform.select({
+  ios: () => require('ComponentIOS'),
+  android: () => require('ComponentAndroid')
+})();
+
+// android version
+if (Platform.Version === 25) {
+  console.log('Running on Nougat!');
+}
+// IOS version
+const majorVersionIOS = parseInt(Platform.Version, 10);
+if (majorVersionIOS <= 9) {
+  console.log('Work around a change in behavior');
+}
+
+
+
+BigButton.ios.js
+BigButton.android.js
+You can then require the component as follows:
+
+import BigButton from './BigButton';
+React Native will automatically pick up the right file based on the running platform.
+
+
+Container.js # picked up by Webpack, Rollup or any other Web bundler
+Container.native.js # picked up by the React Native bundler for both Android and iOS (Metro)
+
+import Container from './Container';
+
+
+
+4. Key Of Each Element In List Should Be Unique
+In React, unique keys help identify which items have changed, are added, or are removed. The best way to choose a key
+is to use a string that identifies a list item among its siblings uniquely. We recommend to use IDs from your list item as keys:
+
+
+    const todoItems = todos.map((todo) =>
+      <li key={todo._id}>
+        {todo.text}
+      </li>
+    );
+
+
+
+
+5. Manage Static Image Resources
+React Native integrates the images and other media assets in such a way that can support in your iOS and Android apps. To add a static image in your app,
+you have to do in such a way that the image name in require has to be known statically.
+   // BAD
+    var icon = this.props.active ? 'icon-innofied-active' : 'icon-innofied-inactive';
+    <Image source={require('./' + icon + '.png')} />;
+
+   // GOOD
+    var icon = this.props.active
+     ? require('./icon-innofied-active.png')
+     : require('./icon-innofied-inactive.png');
+    <Image source={icon} />;
+
+
+Create aliases using babel-plugin-module-resolver to avoid nested imports such as import Product from '../../../Components/Product'. Aliases created using babel-plugin-module-resolver look something like this.
+
+
+alias: {
+          actions: './app/actions',
+          api: './app/api',
+          assets: './app/assets',
+          components: './app/components',
+          containers: './app/containers',
+          constants: './app/constants',
+          sagas: './app/sagas',
+          selectors: './app/selectors',
+          types: './app/types',
+          utils: './app/utils',
+        }
+
+You can use imports like import Product from 'components/Product' after setting it up.
+
+
+
+Also remember to use the | symbol to create Exact object types for even stronger type safety. This ensures new keys cannot be added to an object.
+
+
+type LoginUserType = {|
+  email: string,
+  password: string,
+|}
